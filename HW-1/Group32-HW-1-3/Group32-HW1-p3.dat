@@ -1,0 +1,33 @@
+#Group32 - Rumainum & Navarrete
+#HW 1
+#AMPL model file for Problem 1-3 Part b
+#Portfolio Selection 
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+# set of bonds from A to E
+set BOND := A B C D E;
+
+# parameter variables:
+# isGov  			   - true if bond type is government/agency 
+# yieldToMaturity 	   - yield to maturity
+# afterTaxYield 	   - after-tax yield
+# qualityCoeff 		   - bank's quality coefficient
+# yearsToMaturityCoeff - years to maturity's coefficient
+
+param: isGov,   yieldToMaturity, 	afterTaxYield, qualityCoeff,   yearsToMaturityCoeff :=
+ A 	   	0				0.043 			0.043	    	0.6		 4
+ B	   	1				0.054			0.027	   		0.6		 10
+ C	   	1				0.050			0.025	   	   -0.4		-1
+ D	   	1				0.044			0.022	   	   -0.4		-2
+ E	   	0				0.045			0.045	    	3.6		-3;
+
+#maximum investment of 10 million
+param maxInvestment = 10; 
+#minimum investment of 4 million in combination of Government & Agency bond types 
+param minGovAg 	    =  4; 
+
+#the after-tax rate due to loan for part b
+param loanAfterTaxRate = -0.0275;

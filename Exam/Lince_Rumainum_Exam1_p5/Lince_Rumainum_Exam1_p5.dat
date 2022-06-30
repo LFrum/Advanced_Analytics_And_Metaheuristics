@@ -1,0 +1,28 @@
+#Exam 1
+#Lince Rumainum
+#AMPL data file for Problem 5
+#Mix Tape
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+#Sides of the mix tape
+set SIDES := A B;
+#Songs available to put on the mix tape
+set SONGS := 1 2 3 4 5 6 7 8 9 10 11;
+
+#tape length for each song (in cm)
+param: length :=
+ 1		44
+ 2		67
+ 3		37
+ 4		54
+ 5		79
+ 6		56
+ 7		35
+ 8		37
+ 9		53
+10		70
+11		37 ;
+

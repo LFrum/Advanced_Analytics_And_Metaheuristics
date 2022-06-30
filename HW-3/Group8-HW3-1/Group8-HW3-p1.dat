@@ -1,0 +1,64 @@
+#Group8 - Rumainum & Vance
+#HW 3
+#AMPL model file for Problem 3-1
+#Boomer Sooner Air Services (BSAS)
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+# set of airports
+set AIRPORT := KCID1 KACK KMMU KBNA KTUL KCID2;
+
+# parameter variables:
+# fuelBurn  		 	 - amount of fuel when traveling into that airport 
+# fuelPrice 	   	 	 - price of fuel at that airport
+# rampFee 	   		 	 - ramp fee of that airport
+# minPurchasedToWaiveFee - minimum amount of fuel (in gallons) purchased to waive ramp fee
+#	KCID has no minimum since it's home airport
+#	the rest is minus 1 from info so there will be fee up to that value
+# minLandingFuel	 	 - minimum amount of fuel needed
+
+param: fuelBurn,   fuelPrice, 	rampFee, minPurchasedToWaiveFee, minLandingFuel:=
+ KCID1 	   	  0			4.00 		  0	    			      0			   	  0
+ KACK	   5100			8.32		800	   					600			   2500
+ KMMU	   2200			8.99		750	   	   				500			   2500
+ KBNA	   4700			6.48		600	   	   				650			   2500
+ KTUL	   3800			9.27		800	   	   				500			   2500
+ KCID2	   3600			4.00		  0	    			      0			   7000;
+
+
+# Passengers info:
+# 2 - CEO & CFO of Boomer, Inc.
+# 4 - CEO & CFO + 2 passengers from Nantucket
+# 8 - CEO & CFO + 2 passengers from Nantucket + 4 passengers from NY
+param passengers:=
+ KCID1 	2 
+ KACK	4 
+ KMMU	8 
+ KBNA	8 
+ KTUL	8 
+ KCID2  8;
+
+# fuel tank capacity (in pounds)
+param tankCapacity = 14000;
+
+# maximum ramp weight (in pounds)
+param maxRampWeight = 36400; 
+
+# maximum landing weight (in pounds)
+param maxLandingWeight = 31800; 
+
+# weight of Basic Operating Weight (BOW) (in pounds)
+# BOW includes structures of the aircraft, a stocked galley,
+#  emergency equipment, and the crew
+param BOW = 22800;
+
+# maximum Fuel Tank Capacity (in pounds)
+param  fuelTankCap = 14000;
+
+# average weight per passenger (with lagguge) (in pounds)
+param avePassWeight = 200;
+
+# gallon to pound conversion rate for jet fuel
+param fuelWeightInLbs = 6.7;

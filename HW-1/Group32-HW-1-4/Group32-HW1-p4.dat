@@ -1,0 +1,25 @@
+#Group32 - Rumainum & Navarrete
+#HW 1
+#AMPL model file for Problem 1-4
+#Advertising
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters-----------------------------------------------
+param budget = 1000000;    # Total adverstising budget
+param tv_cpm = 20000; 	   # Cost per minute for TV ads
+param tv_reach = 1800000;  # Potential customers for TV ads
+param mag_cpp = 10000; 	   # Cost per page for magazine ads
+param mag_reach = 1000000; # Potential customers for mag ads
+
+#for part b-----------------------------------------------
+param tv_person_weeks  = 1; 		# Number of person-weeks to create a tv minute
+param mag_person_weeks = 3; 		# Number of person-weeks to create a magazine page
+param person_weeks_available = 100; # Max person-weeks available
+
+#for part c-----------------------------------------------
+param radio_cpm = 2000; 	# Cost per minute for radio ads
+param radio_reach = 250000; # Potential customers for radio ads
+# Number of person-weeks to create a radio minute (1 person-day = 1/7 person-week)
+param radio_person_weeks = 0.142857; 

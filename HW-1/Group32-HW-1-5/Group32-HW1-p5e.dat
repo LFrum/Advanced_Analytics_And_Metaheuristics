@@ -1,0 +1,34 @@
+#Group32 - Rumainum & Navarrete
+#HW 1
+#AMPL model file for Problem 1-5e
+#Steel Mill
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#Code from:
+#Figure1-6b from AMPL book pg 17 
+
+#parameters and sets-----------------------------------------------
+set PROD := bands coils plate;
+set STAGE := reheat roll finishing; #add finishing to stage
+
+#add rates for finishing 
+param rate:  reheat roll finishing :=
+bands 			200  200 Infinity
+coils 			200  140 Infinity
+plate 			200  160      150;
+
+#no change here
+param: profit commit market :=
+bands 	   25 	1000   6000 
+coils 	   30  	 500   4000 
+plate 	   29  	 750   3500;
+
+#add available time for finishing
+param avail := reheat 35 roll 40 finishing 20;
+
+
+
+
+

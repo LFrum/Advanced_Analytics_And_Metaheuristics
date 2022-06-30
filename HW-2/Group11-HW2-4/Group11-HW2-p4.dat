@@ -1,0 +1,62 @@
+#Group11 - Rumainum & 
+#HW 2
+#AMPL data file for Problem 2-4
+#Racecar Tires
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and setssets-----------------------------------------------
+#Using the circulation formulation 
+#source node is where it started
+#terminal node is the sink node to close the loop back to source node
+#node, such as, 1p, is node split of NODE 1
+#1p is for 1', 2p is for 2', and so on
+#1 is for day 1, 2 is for day 2, and so on
+#the prime days are used to get the demand and 
+#node to calculate reshaping services
+set NODES:=  source 1 2 3 4 1p 2p 3p 4p  terminal;
+
+# Arcs 
+set ARCS:= 	(source, *) 1 2 3 4 #virtual source node
+			#node split
+			(1, 1p)
+			(2, 2p) 
+			(3, 3p) 
+			(4, 4p)
+			#quick and normal service
+			(1p, *) 2 3 terminal                  
+           	(2p, *) 3 4 terminal                    
+           	(3p, *) 4 terminal                      
+           	#closed loop
+           	(4p, terminal)           	
+	   		(terminal , source);
+
+# c: new tire cost or normal or quick reshaping costs	
+param: 	c l u :=
+#source node
+#buying new tires for each day of the race
+[source,1]  600 . .
+[source,2]  600 . .
+[source,3]  600 . .
+[source,4]  600 . .
+
+#for node 1 and node 1'
+[1,1p]   .  320 320 #given number of tires needed
+[1p,2]  250  .  320	#for quick service 
+[1p,3]   95  .  320	#for normal service 
+
+#for node 2 and node 2'
+[2,2p]   .  240 240 #given number of tires needed
+[2p,3]  250  .  240	#for quick service
+[2p,4]   95  .  240	#for normal service
+
+#for node 3 and node 3'
+[3,3p]   .  400 400	#given number of tires needed
+[3p,4]  250  .  400	#for quick service
+
+#for node 4
+[4,4p]   .  520 520	#given number of tires needed
+
+#close the loop
+[terminal,source]  . . . ;

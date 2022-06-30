@@ -1,0 +1,47 @@
+#Exam 1
+#Lince Rumainum
+#AMPL data file for Problem 4
+#Work Crews
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+#all the nodes needed for the Work Crews Network
+# DUMMY node is used to balanced the network 
+set NODES := CREW1 CREW2 CREW3 CREW4 CREW5 CREW6 PROJECT1 PROJECT2 PROJECT3 PROJECT4 DUMMY; 
+
+#Arcs flow from one node to another in the network
+# what projects can each crew possibly do
+set ARCS := (CREW1, *) PROJECT2 PROJECT3 PROJECT4 DUMMY
+			(CREW2, *) PROJECT1 PROJECT2 PROJECT3 DUMMY
+			(CREW3, *) PROJECT1 PROJECT3 DUMMY
+			(CREW4, *) PROJECT1 PROJECT3 PROJECT4 DUMMY
+			(CREW5, *) PROJECT1 PROJECT2 DUMMY
+			(CREW6, *) PROJECT2 PROJECT4 DUMMY;
+
+# positive values indicate they are the "supply" nodes 
+# negative values indicate they are the "demand" nodes			
+param b :=
+	CREW1 1
+	CREW2 1
+	CREW3 1
+	CREW4 1
+	CREW5 1
+	CREW6 1
+	PROJECT1 -1
+	PROJECT2 -1
+	PROJECT3 -1
+	PROJECT4 -1
+	DUMMY 	 -2;
+	
+#the cost of one unit flow on (in thousands of dollar) (i in CREWS,j in PROJECTS)
+param c: PROJECT1 PROJECT2 PROJECT3 PROJECT4 :=
+	CREW1	.			 8		  6		  12
+	CREW2	15			12		  7		   .
+	CREW3	10			 .		  5		   .
+	CREW4	12			 .		 12		  16
+	CREW5	18			17	  	  .		   .
+	CREW6	.			13	  	  .		  14;
+
+	

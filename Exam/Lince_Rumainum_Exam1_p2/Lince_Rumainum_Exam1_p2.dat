@@ -1,0 +1,30 @@
+#Exam 1
+#Lince Rumainum
+#AMPL data file for Problem 2
+#Post COVID Party Planning
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+# Type of ingredients
+set INGREDIENTS := 1 2 3;
+# Products that will be produced from mixing the ingredients
+# BevA  - Beverage A
+# BevB  - Beverage B
+# Waste - Toxic Waste By-Product
+set PRODUCTS := BevA BevB Waste;
+
+# Costs per liter to buy each ingredients (in dollar)
+param: cost:=
+	1	 12
+	2	 25
+	3	  9;
+
+# Cost per liter of disposal fee to dispose the toxic waste
+param disposalFee = 8;
+
+# Money available to spend to buy the ingredients (in dollar)
+param maxSpending = 300;
+
+

@@ -1,0 +1,35 @@
+#Group32 - Rumainum & Navarrete
+#HW 1
+#AMPL model file for Problem 1-6
+#Portfolio Selection Revisited
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+# set of bonds from A to E
+set BOND := A D;
+
+# parameter variables:
+# isGov  			   - true if bond type is government
+# isMunicipal  		   - true if bond type is municipal
+# yieldToMaturity 	   - yield to maturity
+# afterTaxYield 	   - after-tax yield
+# qualityCoeff 		   - bank's quality coefficient
+# yearsToMaturityCoeff - years to maturity's coefficient
+
+param:  isGov, isMunicipal,  yieldToMaturity, 	afterTaxYield, qualityCoeff,   yearsToMaturityCoeff :=
+ A 	   		0		1			0.043 			0.043	    		0.6			 4
+ D	   		1		0			0.044			0.022	   	 	   -0.4			-2;
+
+#maximum investment of 10 million
+param maxInvestment = 10; 
+#minimum investment of 4 million in combination of Government & Agency bond types 
+param minGovAg 	    =  4; 
+#the after-tax rate due to loan
+param loanAfterTaxRate = -0.0275;
+
+#maximum investment in municipal bonds up to $3 million
+#change the maxInvestmentInMunicipal to anything above 3.33, 
+#the limit become non-binding and break other constraints
+param maxInvestmentInMunicipal =  3.0;

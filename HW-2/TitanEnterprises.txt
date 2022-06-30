@@ -1,0 +1,33 @@
+reset;
+
+option solver cplex;
+option cplex_options 'sensitivity';
+
+#sets 
+set I; # set of investments
+
+#parameters
+param limit{I} default Infinity; #upper limits on investment amounts
+
+#DV
+var x{I} >=0;  #amount to invest in investment i in I
+
+#OBJECTIVE
+maximize return: 1.4*x['E'] + 1.06*x['b3'] + 1.75*x['D'] + x['B'];
+
+
+#constraints
+subject to year1:  x['A'] + x['D'] + x['C'] + x['b1'] = 1000000;
+subject to year2: 0.3* x['A'] + 1.06* x['b1'] + 1.1* x['C'] = x['B'] + x['b2'] ;
+subject to year3: x['A'] + 0.3* x['B'] + 1.06* x['b2'] = x['E'] + x['b3'];
+
+subject to limits {i in I}: x[i] <= limit[i];
+
+data TitanEnterprises.dat;
+
+solve;
+display x, x.slack, x.current, x.up, x.down, x.rc;
+display limits, limits.up, limits.down;
+display year1, year1.up, year1.down;
+display year2, year2.up, year2.down;
+display year3, year3.up, year3.down;

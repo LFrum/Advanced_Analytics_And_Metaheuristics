@@ -1,0 +1,48 @@
+#Group11 - Rumainum & 
+#HW 2
+#AMPL data file for Problem 2-3
+#Outdoor Grilling
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+#Nodes for every age of the grill
+#age 0 is for the first year when the grill was purchased
+set NODES := 0 1 2 3 4 5;
+
+#Arcs for each possible route each node can take
+set ARCS := 
+	(0,1) (0,2) (0,3) (0,4) (0,5) 
+	(1,2) (1,3) (1,4) (1,5)
+	(2,3) (2,4) (2,5)
+	(3,4) (3,5)
+	(4,5);
+
+#using the formulation of the shortest path problem
+#age 0 as the source node (b = 1), 
+#age 5 as the terminal node (b = -1), and
+#all other nodes are transshipment nodes (b = 0, which is the default value), 
+#so we have:
+param b :=
+	0 	 1
+	5	-1;
+
+#for the shortest path problem lower and upper bounds are set to default
+#using table 5 information and calculating the cost
+#where net cost, 
+#c = purchasing costs + maintenance costs - money received from eBay
+#we have:
+param c :=
+		[0, *] 1 3400	2 5550	3 10150	4 13600	5 19350  
+        [1, *] 2 3400	3 5550  4 10150 5 13600 
+        [2, *] 3 3400	4 5550 	5 10150
+        [3, *] 4 3400	5 5550
+        [4, *] 5 3400;
+        
+#cost of keeping the grill for: 
+#1 	year  - $ 3,400
+#2 	years - $ 5,550
+#3 	years - $10,150
+#4 	years - $13,600
+#5 	years - $19,350

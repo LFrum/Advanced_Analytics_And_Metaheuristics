@@ -1,0 +1,27 @@
+#Rumainum 
+#Final Exam
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+# set of airports
+set J := segment1 segment2 segment3 segment4 segment5 segment6;
+
+# parameter variables:
+# u - the maximum number of officers that can be assigned at that segment  
+# s - the expected number of speeders per officer at that segment
+
+param: 		   u,   		s, 		c:=
+ segment1 	   5			11 		20
+ segment2	   9			6		200
+ segment3	   5			14		30
+ segment4	   6			4		90
+ segment5	   8			2		50
+ segment6	   7			9		110;
+
+#maximum available officers
+param maxAvailOfficer = 20;
+
+#total amount of time for captain to visit segments (in minutes)
+param maxCaptainTime = 300

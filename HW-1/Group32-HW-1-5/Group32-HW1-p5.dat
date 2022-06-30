@@ -1,0 +1,33 @@
+#Group32 - Rumainum & Navarrete
+#HW 1
+#AMPL model file for Problem 1-5 (part a,b,c,d)
+#Steel Mill
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#Code from:
+#Figure1-6b from AMPL book pg 17 
+
+#parameters and sets-----------------------------------------------
+set PROD := bands coils plate;
+set STAGE := reheat roll;
+
+param rate: reheat roll :=
+bands 200 200
+coils 200 140
+plate 200 160 ;
+
+#adding min_shares as new variable for part d
+#case 1: bands: 0.4, coils: 0.1, plate:0.4
+#case 2: bands: 0.5, coils: 0.1, plate:0.5
+param: profit commit market min_shares :=
+bands 	   25 	1000   6000 	   0.4
+coils 	   30  	 500   4000 	   0.1 
+plate 	   29  	 750   3500 	   0.4;
+
+param avail := reheat 35 roll 40 ;
+
+#for part b
+#total maximum weight of all products combined
+param max_weight := 6500; 

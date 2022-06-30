@@ -1,0 +1,79 @@
+#Group11 - Rumainum & 
+#HW 2
+#AMPL data file for Problem 2-5
+#Dunder Mifflin Paper Company
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+#use with Generalized flow model: GMCNFP.txt model
+#note: default arc costs and lower bounds are 0
+#      default arc upper bounds are infinity
+#      default node requirements are 0
+#      default multiplier is 1
+
+#set NODES :=  	p1 p2 p3 p4            #product time period nodes
+#		c1 c2 c3 c4 c5 c5p;    #cash flow time period nodes
+
+set NODES :=  S CS Sc ScOT ScP Google
+			  G U UOT UP FB
+			  St StOT StP
+			  dummy;
+
+set ARCS := 
+			(CS, *) S Sc U St
+			( G, *) S Sc U St
+			
+			(Sc, *) ScOT ScP
+			(ScOT, ScP)
+			
+			( U, *)  UOT  UP
+			(UOT,  UP)
+			
+			(St, *) StOT StP
+			(StOT, StP)
+			
+			(ScP, *) Google FB
+			(UP, *) Google FB
+			(StP, *) Google FB
+			(Google, dummy)
+			(FB, dummy);
+
+param b := CS -100
+		   G -200
+		   Google -1000
+		   FB -600;
+
+param:  c u mu :=
+	
+        [CS, Sc] 2300  100  12   
+        [CS,  U] 2250  100  12
+        [CS, St] 2275  100  12
+        
+        [G, Sc] 2000  200  10   
+        [G,  U] 1950  200  10
+        [G, St] 1975  200  10      
+			
+        [Sc, ScOT] .  100 . 
+        [Sc,  ScP]  90  505  .
+        
+        [U, UOT] .  100  1.5 
+        [U,  UP] 105  465  .
+        
+        [St, StOT] .  100  1.5 
+        [St,  StP] 115  570  .
+        
+        [Sc, Google]  8  .  .
+        [Sc,  	 FB] 15  .  .        
+        
+        [U,  Google] 14  .  .
+        [U,  	 FB] 18  .  .        
+ 
+        [St, Google] 24  .  .
+        [St,  	 FB] 20  .  .  
+        
+        [Google, dummy] -1 . 0
+        [FB, dummy] -1 . 0;           #virtual arc has negative cost to icentavize flow
+
+  

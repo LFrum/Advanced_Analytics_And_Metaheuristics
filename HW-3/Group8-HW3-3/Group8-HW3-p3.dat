@@ -1,0 +1,29 @@
+#Group8 - Rumainum & Vance
+#HW 3
+#AMPL model file for Problem 3-3
+#ED On-Call
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#parameters and sets-----------------------------------------------
+# set of doctors
+set DOCTOR := Doc1 Doc2 Doc3 Doc4 Doc5 Doc6;
+# set of procedures
+set PROCEDURE := P1 P2 P3 P4 P5 P6 P7 P8;
+
+# cost of procedure depending on which doctor
+# Default cost of $1 million is used for some procedures 
+#	because that doctor can NOT perform that procedure.
+#	Since the goal is to minimize cost, the doctor with
+#	default price will not be chosen to do the procedure. 
+param procedureCost:
+	Doc1  Doc2  Doc3  Doc4  Doc5  Doc6:=
+P1	3100  4800     .     .	2950     .
+P2	   .  4800     .  3750	2950     .
+P3	   .  4800  2500  3750	   .     .
+P4	3100     .  2500  3750	   .  1400
+P5	3100     .     .  3750	2950     .
+P6	   .  4800     .     .	2950  1400
+P7	   .  4800  2500     .	   .  1400
+P8	3100     .  2500  3750	   .     .;

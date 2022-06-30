@@ -1,0 +1,68 @@
+#Group11 - Rumainum & Haddad
+#HW 2
+#AMPL model file for Problem 2-2
+#Titan Enterprising Case Study
+#use for part a, b, and c
+
+#indicate it's a data file-----------------------------------------
+data;
+
+#sets--------------------------------------------------------------
+#Bank investments are seperated since each one are used to balance any money
+#	not invested in a given year
+#Bank_2021 indicate the investment to the Bank on year 2021
+#Bank_2022 indicate the investment to the Bank on year 2022
+#Bank_2023 indicate the investment to the Bank on year 2023
+#Other project A, B, C, D, and E
+set PROJECT = BANK_2021 BANK_2022 BANK_2023 A B C D E;
+
+#parameters-----------------------------------------------
+#maximum investment for each project
+param maxInvestment :=
+	BANK_2021 Infinity
+	BANK_2022 Infinity
+	BANK_2023 Infinity
+	    A    	500000
+	    B   	500000
+	    C  	  Infinity
+	    D  	  Infinity
+	    E   	750000;
+
+#the return rate on year 2022	
+param secondYearRate :=
+	BANK_2021 0.06
+	BANK_2022 0.00
+	BANK_2023 0.00
+	    A  	  0.30
+	    B  	  0.00
+	    C  	  1.10
+	    D  	  0.00
+	    E  	  0.00;
+	  
+#the return rate on year 2023	  
+param thirdYearRate :=
+	BANK_2021 0.00
+	BANK_2022 0.06
+	BANK_2023 0.00
+	    A  	  1.00
+	    B  	  0.30
+	    C  	  0.00
+	    D  	  0.00
+	    E  	  0.00;
+
+#the return rate on year 2024	  
+param fourthYearRate :=
+	BANK_2021 0.00
+	BANK_2022 0.00
+	BANK_2023 0.06
+	    A  	  0.00
+	    B  	  1.00
+	    C  	  0.00
+	    D  	  1.75
+	   #D  	  1.70
+	   #E  	  1.34 
+	    E  	  1.40;	  	  
+
+#the initial investment in 2021, which is a million dollar	  
+param initalInvestment = 1000000;
+	
